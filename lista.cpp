@@ -12,64 +12,67 @@ public:
 		this->next = sigue;
 		this->prev = sigue;
 	}
-	/*
-	void print(){
-		cout<<"Value: "<<value<<endl;
-	}
-	*/
 };
 
 class Linkedlist{
 public:
-	Node *head;
+	Node *head=nullptr;
 	Linkedlist(int n){
-		head=nullptr;
+		//head=nullptr;
 		head= new Node(n);
 		head->next = head;
 		head->prev = head;
+		//Node* primero=nullptr;
+		//Node* ultimo=nullptr;
 	}
 	
 	void insertar(int val){
 		Node* temp2 = new Node(val);
-		
-		if (head == nullptr){
+		/*
+		if (head->next == nullptr){
 			head = temp2;
 			head->next = head;
 			head->prev = head;
-			return;
+			
 		}
-		
+		*/
 		Node *temp= head;
+		
 		while(temp->next != head && temp->next->value < val){
-			temp = temp->next; /* busca */
-			//head->prev = temp;
+			temp = temp->next;
 		}
 		
-		if (temp->value == val) return;
+		//if (temp->value == val) return;
 		
-		if (temp == head){
-			if(head->next=head)
+		if (temp2/* == head*/)
+		{
+			if(head/*->next=head*/)
 			{
+				if(val < temp->value){
+					temp2->next = temp;
+					temp2->prev=temp->prev;
+					head->prev=temp;
+					head = temp2;
+				}
 				temp2->prev = head->prev;
 				temp2->next=head;
 				head->prev->next=temp2;
 				head->prev = temp2;
-				//head=temp2;
 				return;
 			}
-			else{
-				temp2->prev=temp2;
-				temp2->next=temp2;
-			}
 			/*
-			else if (val > temp->value){
+			else if(val < temp->value){
 				temp2->next = temp;
-				temp2->prev=head->prev;
+				temp2->prev=temp->prev;
 				head->prev=temp;
 				head = temp2;
 				return;
 			}
 			*/
+			else{
+				temp2->prev=temp;
+				temp2->next=temp;
+			}
 		}
 		head=temp2;
 		/*
@@ -79,10 +82,10 @@ public:
 		temp->prev = temp2;
 		*/
 	}
-	
-	
+
+
 	void borrar(int val){
-		
+
 		if (head->next == nullptr){
 			head = nullptr;
 		}
@@ -104,28 +107,31 @@ public:
 			delete temp2;
 		}
 	}
-	
+
 	void print(){
-		Node *temp2= head->next;
+		Node *temp = head->next;
+		//Node *temp2 = head->prev;
 		cout<<head->value<<' ';
-		while(temp2 != head){
-			cout << temp2->value << ' ';
-			temp2 = temp2->next; /* BUSCAR */
+		while(temp != head){
+			cout << temp->value << ' ';
+			temp = temp->next; /* BUSCAR */
 		}
 	}
 
 };
 int main(int argc, char *argv[]) {
 	Linkedlist Jaz(4);
-	Jaz.insertar(7);
+	//Jaz.insertar(2);
+	Jaz.insertar(5);
+	Jaz.insertar(10);
 	Jaz.insertar(9);
-	//Jaz.insertar(8);
+	Jaz.insertar(8);
 	//Jaz.insertar(5);
 	//Jaz.insertar(2);
-	//Jaz.borrar(3);
-	//Jaz.borrar(6);
-	//Jaz.borrar(7);
+	//Jaz.borrar(2);
+	//Jaz.borrar(4);
+	//Jaz.borrar(5);
+	//Jaz.borrar(9);
 	Jaz.print();
-	//Jaz1.print();
 	return 0;
 }
