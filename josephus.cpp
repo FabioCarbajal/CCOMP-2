@@ -8,16 +8,7 @@ public:
 	Node(int val = 0, Node *sigue = NULL){
 		this->value = val;
 		this->next = sigue;
-	}
-	
-	
-	/*Node *newNode(int data)
-	{
-		Node *temp = new Node;
-		temp->next = temp;
-		temp->data = data;
-	}*/
-	
+	}	
 };
 
 
@@ -137,50 +128,53 @@ public:
 		}
 		cout<<endl;
 	}
-
-	/*void JosephusPosition(int m, int n)
+	
+	void Josephus(int k, int n)
 	{
-		Node *head = newNode(1);
+		Node *head = new Node(1);
 		Node *prev = head;
 		for (int i = 2; i <= n; i++)
 		{
-			prev->next = newNode(i);
+			prev->next = new Node(i);
 			prev = prev->next;
 		}
 		prev->next = head;
 		
 		Node *ptr1 = head, *ptr2 = head;
-		while (ptr1->next != ptr1)
+		while (ptr1->next->next != ptr1)
 		{
-			int count = 1;
-			while (count != m)
+			int cont = 1;
+			while (cont != k)
 			{
 				ptr2 = ptr1;
 				ptr1 = ptr1->next;
-				count++;
+				cont++;
 			}
 			ptr2->next = ptr1->next;
 			ptr1 = ptr2->next;
 		}
 		
-		cout<<"Last person left standing(Josephus Position) is "<< ptr1->data;
-	}*/
+		cout<<"Josephus debe ser el soldado numero: "<< ptr1->value<<" y su amigo el: "<<ptr1->next->value;
+	}
 };
 
 int main(int argc, char *argv[]) {
 	CircularLL Jaz;
+	/*
 	Jaz.insertar(9);
 	Jaz.insertar(2);
 	Jaz.insertar(10);
 	Jaz.insertar(5);
 	Jaz.insertar(4);
-	Jaz.print();	
-	
+	Jaz.print();
+	*/
+	Jaz.Josephus(4,80);
+	/*
 	if(Jaz.head != NULL){
 		Jaz.print();}
 	else{
 		cout<<"Lista Vacía"<<endl;
 	}
-	
+	*/
 	return 0;
 }
